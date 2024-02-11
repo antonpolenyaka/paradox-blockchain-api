@@ -1,0 +1,237 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Blockchain API",
+    "description": "Documentation Blockchain API."
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "TVL",
+      "description": "TVL Endpoinds"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-KEY",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/tvl/daily/{days}": {
+      "get": {
+        "tags": [
+          "TVL"
+        ],
+        "description": "Endpoint to get last X days data.",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TVL values.",
+            "schema": {
+              "$ref": "#/definitions/FindedTVLDaily"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/tvl/monthly/{months}": {
+      "get": {
+        "tags": [
+          "TVL"
+        ],
+        "description": "Endpoint to get last X months data.",
+        "parameters": [
+          {
+            "name": "months",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TVL values.",
+            "schema": {
+              "$ref": "#/definitions/FindedTVLMonthly"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/tvl/annual": {
+      "get": {
+        "tags": [
+          "TVL"
+        ],
+        "description": "Endpoint to get all data in annual format.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "TVL values.",
+            "schema": {
+              "$ref": "#/definitions/FindedTVLAnnual"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FindedTVLDaily": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "example": true
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "example": "Get last 1 days'"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "number",
+                    "example": 1683849600
+                  },
+                  "day": {
+                    "type": "string",
+                    "example": "12/05/2023"
+                  },
+                  "value": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FindedTVLMonthly": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "example": true
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "example": "Get last 1 months'"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "number",
+                    "example": 1680307200
+                  },
+                  "month": {
+                    "type": "string",
+                    "example": "04/2023"
+                  },
+                  "value": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FindedTVLAnnual": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "example": true
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "example": "Get all data annual'"
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "number",
+                    "example": 1672531200
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2023"
+                  },
+                  "value": {
+                    "type": "number",
+                    "example": 625000253
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
